@@ -14,7 +14,7 @@ migrate(db, {migrationsFolder: "drizzle"})
 
 export const appRouter = router({
  getTodos: publicProcedure.query(async () =>  {
-    const response = await db.select().from(todos).all()
+    const response =  db.select().from(todos).all()
     return response
  }),
  addTodo: publicProcedure.input(z.object({
@@ -23,7 +23,7 @@ export const appRouter = router({
  })).mutation(async (req) => {
     try {
         // const validatedReq = todoSchema.parse(req)
-        await db.insert(todos).values({name: req.input.name, content: req.input.content, done: 0}).run()
+         db.insert(todos).values({name: req.input.name, content: req.input.content, done: 0}).run()
             // await db.insert(todos).values({name: req.input, content: req.input, done: 0, id: req.input}).run()
     } catch (error) {
         console.log(error)
